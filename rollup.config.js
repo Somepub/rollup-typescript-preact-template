@@ -7,6 +7,7 @@ import analyze from 'rollup-plugin-analyzer'
 import html from '@rollup/plugin-html';
 import replace from '@rollup/plugin-replace';
 import livereload from "rollup-plugin-livereload"
+import styles from "rollup-plugin-styles";
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 const extensions = [
@@ -32,6 +33,7 @@ export default {
         }),
         babel(),
         commonjs(),
+        styles(),
         html({
             fileName: 'index.html',
             title: 'Rollup template',

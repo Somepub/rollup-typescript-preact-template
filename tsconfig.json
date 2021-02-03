@@ -14,11 +14,17 @@
     "esModuleInterop": true,
     "allowJs": true,
     "checkJs": true,
-    "noEmitOnError": false
+    "noEmitOnError": false,
+    "skipLibCheck": true,
+    "baseUrl": "."
   },
   "include": ["src/**/*"],
   "exclude": [
     "node_modules",
     "dist"
-  ]
+  ],
+  "paths": {
+    "react": ["node_modules/preact/compat/"],
+    "react-dom": ["node_modules/preact/compat/"]
+  }
 }
