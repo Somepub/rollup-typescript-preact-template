@@ -3,19 +3,21 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import serve from 'rollup-plugin-serve';
-import livereload from 'rollup-plugin-livereload';
+import analyze from 'rollup-plugin-analyzer'
 import html from '@rollup/plugin-html';
 import replace from '@rollup/plugin-replace';
+import livereload from "rollup-plugin-livereload"
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 const extensions = [
     '.js', '.jsx', '.ts', '.tsx',
 ];
+const development = process.env.ROLLUP_WATCH;
 
 export default {
     input: 'src/index.tsx',
     output: {
-        dir: 'build',
+        dir: 'dist',
         format: 'cjs'
     },
     plugins: [
@@ -26,14 +28,13 @@ export default {
         typescript(),
         nodeResolve({
             browser: true,
-            dedupe: ['react', 'react-dom'],
             extensions
         }),
         babel(),
         commonjs(),
         html({
             fileName: 'index.html',
-            title: 'Rollup + TypeScript + React = ❤️',
+            title: 'Rollup template',
             template: ({ title }) => {
                 return `
                 <!DOCTYPE html>
@@ -45,7 +46,7 @@ export default {
                 </head>
                 <body>
                   <div id="app"></div>
-                  <script src="index.js"></script>
+                  <script type="module" src="index.js"></script>
                 </body>
                 </html>
                 `;
@@ -55,10 +56,9 @@ export default {
             host: 'localhost',
             port: 3000,
             open: true,
-            contentBase: ['build'],
+            contentBase: ['dist'],
         }),
-        livereload({
-            watch: 'build',
-        })
+        livereload({ delay: 500, watch: 'dist' }),
+        analyze()
     ]
 };

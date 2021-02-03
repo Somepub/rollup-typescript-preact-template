@@ -1,8 +1,5 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
+import { render } from 'preact';
+import App from './view/app';
 
-const App: React.SFC = () => {
-    return <h1> IDK </h1>
-};
+render(App, document.body);
 
-ReactDOM.render(<App />, document.getElementById('app'));
