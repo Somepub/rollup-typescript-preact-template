@@ -9,6 +9,7 @@ import replace from '@rollup/plugin-replace';
 import livereload from "rollup-plugin-livereload"
 import styles from "rollup-plugin-styles";
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import alias from '@rollup/plugin-alias';
 
 const extensions = [
     '.js', '.jsx', '.ts', '.tsx',
@@ -22,11 +23,10 @@ export default {
         format: 'cjs'
     },
     plugins: [
+        typescript(),
         replace({
             'process.env.NODE_ENV': JSON.stringify( 'production' )
         }),
-        peerDepsExternal(),
-        typescript(),
         nodeResolve({
             browser: true,
             extensions
